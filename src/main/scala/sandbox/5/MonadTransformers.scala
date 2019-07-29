@@ -17,4 +17,11 @@ object MonadTransformers {
       case Some(value) => EitherT.right(Future(value))
       case None        => EitherT.left(Future("Not found"))
     }
+
+  def canSpecialMove(ally1: String, ally2: String): Response[Boolean] =
+    for {
+      fst <- getPowerLevel(ally1)
+      snd <- getPowerLevel(ally2)
+    } yield (fst + snd) > 15
+
 }
